@@ -1,0 +1,3 @@
+url地址--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner--||-- 操作系统--||-- 服务器--||-- 开发语言
+www.51php.com--||-- PHP空间_PHP虚拟主机--||-- 61.168.100.246--||-- WordPress--||-- Not_found--||-- Linux/Unix--||-- Tengine--||-- jQuery--||-- PHP/7.2.1
+www.baidu.com--||-- 百度一下，你就知道--||-- 61.135.169.121--||-- Not_found--||-- jquery--||-- P3p_enabled--||-- chunked Encode--||-- P3p--||-- Linux/Unix--||-- BWS/1.1--||-- jQuery--||-- PHP

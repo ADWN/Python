@@ -1,0 +1,3 @@
+域名--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner信息--||-- 操作系统--||-- 服务器--||-- JS框架--||-- 开发语言
+www.baidu.com--||-- 百度一下，你就知道--||-- 61.135.169.125--||-- Not_found--||-- Not_found--||-- Linux/Unix--||-- BWS/1.1--||-- jQuery--||-- PHP
+www.51php.com--||-- 香港PHP空间_独立IP空间_PHP虚拟主机_无忧主机-www.51php.com--||-- 113.207.34.241--||-- WordPress--||-- PHP--||-- jquery--||-- chunked Encode--||-- 企业版QQ--||-- Tengine--||-- Linux/Unix--||-- Tengine--||-- jQuery--||-- PHP/7.2.1

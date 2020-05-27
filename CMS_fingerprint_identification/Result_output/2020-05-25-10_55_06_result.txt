@@ -1,0 +1,2 @@
+域名--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner信息--||-- 操作系统--||-- 服务器--||-- JS框架--||-- 开发语言
+www.baidu.com--||-- 百度一下，你就知道--||-- 39.156.66.18--||-- Not_found--||-- jquery--||-- P3p_enabled--||-- chunked Encode--||-- P3p--||-- Not_found--||-- BWS/1.1--||-- jQuery--||-- PHP

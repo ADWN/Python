@@ -1,0 +1,3 @@
+域名--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner信息--||-- 操作系统--||-- 服务器--||-- JS框架--||-- 开发语言
+www.baidu.com--||-- Not_found--||-- 61.135.169.121--||-- Not_found--||-- Not_found--||-- Linux/Unix--||-- Not_found--||-- jQuery--||-- Not_found
+www.51php.com--||-- Not_found--||-- 61.168.100.246--||-- WordPress--||-- Not_found--||-- Linux/Unix--||-- Not_found--||-- jQuery--||-- Not_found

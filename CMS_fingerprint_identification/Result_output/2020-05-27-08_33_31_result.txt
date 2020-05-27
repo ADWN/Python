@@ -1,0 +1,6 @@
+域名--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner信息--||-- 操作系统--||-- 服务器--||-- JS框架--||-- 开发语言
+www.51php.com--||-- 香港PHP空间_独立IP空间_PHP虚拟主机_无忧主机-www.51php.com--||-- 113.207.34.241--||-- WordPress--||-- PHP--||-- jquery--||-- chunked Encode--||-- 企业版QQ--||-- Tengine--||-- LINUX--||-- Tengine--||-- jQuery--||-- PHP/7.2.1
+www.hzllw.com--||-- 菏泽老龄网_Welcome--||-- 156.225.188.190--||-- Not_found--||-- ASP.NET--||-- ASP--||-- jquery--||-- 百度分享--||-- __VIEWSTATE--||-- IIS--||-- IIS7.5--||-- WIN2K/NT--||-- Microsoft-IIS/7.5--||-- jQuery--||-- ASP.NET
+www.lckfqedu.com--||-- Not_found--||-- 107.178.170.40--||-- DedeCMS(织梦)--||-- Not_found--||-- WIN2K/NT--||-- Not_found--||-- Not_found--||-- PHP
+www.bzfwy.com--||-- 首页 蚂蚁保险--||-- 14.204.150.35--||-- Not_found--||-- jquery--||-- bootstrap--||-- chunked Encode--||-- Access-Control--||-- LINUX--||-- JSP3/2.0.14--||-- Modernizr--||-- jQuery--||-- PHP
+www.bzdz.net--||-- 现代虐心言情催泪小说_利物浦4-3ac米兰--||-- 107.179.54.174--||-- PHPWind--||-- PHP--||-- ColdFusion--||-- chunked Encode--||-- nginx--||-- LINUX--||-- nginx--||-- Not_found--||-- PHP/7.0.19

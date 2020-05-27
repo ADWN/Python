@@ -1,0 +1,4 @@
+url地址--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner--||-- 操作系统--||-- 服务器--||-- 开发语言
+http://www.baidu.com--||-- 百度一下，你就知道--||-- 61.135.169.125--||-- Not_found--||-- jquery--||--P3p_enabled--||--chunked Encode--||--P3p--||----||-- Linux/Unix--||-- BWS/1.1--||-- PHP
+http://www.51php.com--||-- PHP空间_PHP虚拟主机--||-- 123.138.67.12--||-- wordpress--||-- Not_found--||-- Linux/Unix--||-- Tengine--||-- PHP/7.2.1
+http://www.bilibili.com--||-- 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili--||-- 120.92.141.155--||-- Not_found--||-- chunked Encode--||----||-- Linux/Unix--||-- Not_found--||-- PHP

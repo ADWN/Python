@@ -1,0 +1,2 @@
+域名--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner信息--||-- 操作系统--||-- 服务器--||-- JS框架--||-- 开发语言
+www.bilibili.com--||-- 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili--||-- 119.3.70.188--||-- Not_found--||-- chunked Encode--||-- Linux/Unix--||-- Not_found--||-- Not_found--||-- PHP

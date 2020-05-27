@@ -1,0 +1,4 @@
+域名--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner信息--||-- 操作系统--||-- 服务器--||-- JS框架--||-- 开发语言
+www.hzllw.com--||-- 菏泽老龄网_Welcome--||-- 156.225.188.190--||-- Not_found--||-- ASP.NET--||-- ASP--||-- jquery--||-- 百度分享--||-- __VIEWSTATE--||-- IIS--||-- IIS7.5--||-- Not_found--||-- Microsoft-IIS/7.5--||-- jQuery--||-- ASP.NET
+www.lckfqedu.com--||-- Not_found--||-- 107.178.170.40--||-- DedeCMS(织梦)--||-- Not_found--||-- Not_found--||-- Not_found--||-- Not_found--||-- Not_found
+www.51php.com--||-- PHP空间_PHP虚拟主机--||-- 61.168.100.244--||-- WordPress--||-- Not_found--||-- Linux/Unix--||-- Tengine--||-- jQuery--||-- PHP/7.2.1

@@ -1,0 +1,6 @@
+域名--||-- 网站标题--||-- IP地址--||-- CMS--||-- Banner信息--||-- 操作系统--||-- 服务器--||-- JS框架--||-- 开发语言
+www.bzfwy.com--||-- 首页 蚂蚁保险--||-- 124.161.37.35--||-- Not_found--||-- jquery--||-- bootstrap--||-- chunked Encode--||-- Access-Control--||-- Linux/Unix--||-- JSP3/2.0.14--||-- Modernizr--||-- jQuery--||-- PHP
+www.bzdz.net--||-- Not_found--||-- 107.179.54.174--||-- PHPWind--||-- PHP--||-- chunked Encode--||-- nginx--||-- Not_found--||-- nginx--||-- Not_found--||-- PHP/7.0.19
+www.hzllw.com--||-- 菏泽老龄网_Welcome--||-- 156.225.188.190--||-- Not_found--||-- ASP.NET--||-- ASP--||-- jquery--||-- 百度分享--||-- __VIEWSTATE--||-- IIS--||-- IIS7.5--||-- Not_found--||-- Microsoft-IIS/7.5--||-- jQuery--||-- 
+835.dopa.com--||-- dopa.com--||-- 124.160.121.52--||-- Not_found--||-- PHP--||-- jquery--||-- chunked Encode--||-- Tengine--||-- Linux/Unix--||-- Tengine/1.4.2--||-- jQuery--||-- PHP/5.3.10
+www.lckfqedu.com--||-- Not_found--||-- 107.178.170.40--||-- --||-- Not_found--||-- Not_found--||-- Not_found--||-- --||-- Not_found
