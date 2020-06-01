@@ -12,7 +12,7 @@ import xlwt
 
 class user_function(object):
     def __init__(self):
-        self.proxy_url   = 'https://www.xicidaili.com/nn/'  
+        self.proxy_url   = 'https://www.xicidaili.com/nn/'
         self.proxy_file1 = (os.getcwd() + '/Cms_get/').replace('\\','/') + 'proxies_from_xiciproxy.txt'
         self.proxy_file2 = (os.getcwd() + '/Cms_get/').replace('\\','/') + 'proxies.txt'
         self.proxy_url_list       = [] #获取代理网站代理IP
@@ -31,23 +31,24 @@ class user_function(object):
             read_file.close 
             for value in user_agents_get:
                 headers = {
-                    "Accept":'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                    "User-Agent":value.rstrip('\n'),
-                    "Upgrade-Insecure-Requests":'1',
-                    "Connection":'keep-alive',
-                    "Cache-Control":'max-age=0',
-                    "Accept-Language":'zh-CN,zh;q=0.8',
-                    "Referer": "http://www.baidu.com/link?url=www.so.com&url=www.soso.com&&url=www.sogou.com"          
+                    #"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                    "User-Agent":value.rstrip('\n')
+                    #"Upgrade-Insecure-Requests":"1",
+                    #"Connection":"keep-alive",
+                    #"Cache-Control":"max-age=0",
+                    #"Accept-Language":"zh-CN,zh;q=0.8",
+                    #"Referer": "http://www.baidu.com/link?url=www.so.com&url=www.soso.com&&url=www.sogou.com"         
                 }   
                 self.headers_list.append(headers)   
         except : #打开文件失败时
-            self.headers_list.append({"User-Agent":'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0'})    
+            self.headers_list.append({"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0"})    
         
     def get_page_proxy(self,page,time_out):
         request = urllib.request.Request(url = self.proxy_url + str(page),headers = random.choice(self.headers_list))
         try :
             response = urllib.request.urlopen(request,timeout = time_out)
             text = response.read().decode('utf-8')
+            response.close() #防止被封IP
             proxy_ip = re.findall('<td>\d*\.\d*\.\d*\.\d*</td>',text) 
             proxy_port = re.findall('<td>\d*</td>',text) 
             for i in range(len(proxy_ip)): 
@@ -80,15 +81,15 @@ class user_function(object):
     
     def check(self,time_out,proxy): 
         try :
-            response = requests.get(url='http://www.baidu.com',headers = random.choice(self.headers_list),timeout = time_out,proxies = proxy)
-            if (response.status_code == 200):
-                self.effective_proxy_list.append(str(proxy))           
-        except : pass    
+            response = requests.get(url = 'http://www.baidu.com',headers = random.choice(self.headers_list),timeout = time_out,proxies = proxy)
+            self.effective_proxy_list.append(str(proxy)) 
+            response.close()
+        except : pass
         
     def check_proxy(self,time_out,association_number):
         '''检查代理IP是否有效，有效则将其放进proxies.txt中'''  
         proxies_num = 0 
-        read_file   = open(self.proxy_file1, 'r', encoding = 'utf-8')
+        read_file = open(self.proxy_file1, 'r', encoding = 'utf-8')
         proxy_get   = read_file.readlines()
         read_file.close 
         if (len(proxy_get) != 0): #代理文件中有代理
@@ -113,7 +114,7 @@ class user_function(object):
         '''proxy_list列表：[value,value,...]'''
         proxy_list,process_list = [],[] #获取设置好的代理列表
         if (proxy_setting == 'off'): #不使用代理
-            proxy_list.append(urllib.request.ProxyHandler(proxies = None))
+            proxy_list.append('None')
         elif (proxy_setting == 'open'): #使用代理
             try :          
                 read_file = open(self.proxy_file2,'r',encoding = 'utf-8')
@@ -121,25 +122,24 @@ class user_function(object):
                 read_file.close
                 def check(time_out,proxy): 
                     try :
-                        response = requests.get(url='http://www.baidu.com',headers={'user-agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'},timeout = time_out,proxies = proxy)
-                        if (response.status_code == 200):
-                            proxy_list.append(urllib.request.ProxyHandler(proxies = proxy))  
+                        response = requests.get(url = 'http://www.baidu.com',headers = random.choice(self.headers_list),timeout = time_out,proxies = eval(proxy))
+                        proxy_list.append(proxy)
                     except : pass
 
                 pool= gevent.pool.Pool(association_number)  
                 for value in proxy_get:
-                    process_list.append(pool.spawn(check, time_out,eval(value.rstrip('\n'))))
+                    process_list.append(pool.spawn(check,time_out,value.rstrip('\n')))
                 gevent.joinall(process_list)                     
-                if (len(proxy_list) == 0): #proxy_list没有获取到有效代理IP时，不设置代理
-                    proxy_list.append(urllib.request.ProxyHandler(proxies = None))
-            except : #打开文件失败时，也不设置代理
-                proxy_list.append(urllib.request.ProxyHandler(proxies = None))
+                if (len(proxy_list) == 0): 
+                    proxy_list.append('None')
+            except : 
+                proxy_list.append('None')
 
-        else : pass
+        else : 
+            proxy_list.append('None')
 
-        return self.headers_list,proxy_list 
+        return self.headers_list,proxy_list    
     
-
     def md5_get(self,value):
         '''得到value的MD5值'''
         x = hashlib.md5()
@@ -147,10 +147,19 @@ class user_function(object):
         md5_value = x.hexdigest()
         return md5_value    
 
-    def file_link_dict_get(self,url,time_out,proxy_list):
+    def handler_get(self,proxy_list):
+        handler = []
+        if ('None' in proxy_list) :
+            handler.append(urllib.request.ProxyHandler(proxies = None))
+        else :
+            for value in proxy_list:
+                handler.append(urllib.request.ProxyHandler(proxies = eval(value))) 
+        return handler
+    
+    def file_link_dict_get(self,url,time_out,handler):
         link_list = []
-        request   = urllib.request.Request(url = url,headers = random.choice(self.headers_list)) 
-        opener    = urllib.request.build_opener(random.choice(proxy_list)) #是否使用代理
+        request   = urllib.request.Request(url = url,headers = random.choice(self.headers_list))       
+        opener  = urllib.request.build_opener(random.choice(handler)) #是否使用代理
         urllib.request.install_opener(opener)
         try :
             response = urllib.request.urlopen(request,timeout = time_out) #超时初始设置3 
@@ -158,6 +167,7 @@ class user_function(object):
             file_suffix_list = ['.png', '.ico', '.gif','.svg', '.jpeg','.js','.css','.xml','.txt'] #文件后缀名列表
             tags = ['a', 'A', 'link', 'script', 'area', 'iframe', 'form']  # img
             tos = ['href', 'src', 'action']
+            response.close()
             for tag in tags:
                 for to in tos:
                     link1 = re.findall(r'<%s.*?%s="(.*?)"' % (tag, to), text) #获取=""中的链接
@@ -190,14 +200,15 @@ class user_function(object):
         except : #url请求失败
             self.file_link_dict[url].append('Not_found')
 
-    def file_md5_list_get(self,url,time_out,proxy_list,cms_name,file_link):
+    def file_md5_list_get(self,url,time_out,handler,cms_name,file_link):
         if (file_link != 'Not_found'):
-            request = urllib.request.Request(url = file_link,headers = random.choice(self.headers_list)) 
-            opener  = urllib.request.build_opener(random.choice(proxy_list)) #是否使用代理
+            request = urllib.request.Request(url = file_link,headers = random.choice(self.headers_list))         
+            opener  = urllib.request.build_opener(random.choice(handler)) #是否使用代理
             urllib.request.install_opener(opener)
             try :
                 response  = urllib.request.urlopen(request,timeout = time_out) #超时初始设置3 
                 read      = response.read()
+                response.close()
                 md5_value = self.md5_get(value = read)
                 self.file_md5_list.append([cms_name,file_link.replace(url,''),md5_value,'md5'])
             except : #url请求失败
@@ -208,15 +219,16 @@ class user_function(object):
     def get_file_md5_list(self,domain_list,cms_name_list,time_out,proxy_list,association_number):
         '''#获取file_md5_list列表[['cms_name','path','match_pattern','keyword'],...]'''
         process_list = []
+        handler_list = self.handler_get(proxy_list = proxy_list)
         pool= gevent.pool.Pool(association_number)  
         for domain in domain_list:  
             self.file_link_dict.update({'http://' + domain:[]}) #初始化self.file_link_dict字典{'url':[],...}
-            process_list.append(pool.spawn(self.file_link_dict_get,'http://' + domain,time_out,proxy_list))
+            process_list.append(pool.spawn(self.file_link_dict_get,'http://' + domain,time_out,handler_list))
         gevent.joinall(process_list)
         process_list = [] #清空协程池
         for i in range(len(domain_list)):
             for file_link in self.file_link_dict['http://' + domain_list[i]]:
-                process_list.append(pool.spawn(self.file_md5_list_get,'http://' + domain_list[i],time_out,proxy_list,cms_name_list[i],file_link))
+                process_list.append(pool.spawn(self.file_md5_list_get,'http://' + domain_list[i],time_out,handler_list,cms_name_list[i],file_link))
         gevent.joinall(process_list)
 
         return self.file_md5_list 
@@ -280,5 +292,4 @@ class user_function(object):
                 file.write(data)
             file.close()      
         
-    
-        
+

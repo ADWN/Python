@@ -53,39 +53,30 @@ class GUI(object):
         def creat_menu_about_explain():  
             self.output_data_label['text'] = '工具动态>>:正在查看使用说明书...'
             self.output_data_label.config(fg = 'green')  
-            self.output_data_label.update()             
-            tkinter.messagebox.showinfo(title = '关于--使用说明书', message = '1.1.下拉菜单--说明:工具使用说明书\n'
-            + '1.2.下拉菜单--设置:设置辅助功能\n'
-            + '1.2.1.设置--超时:设置全局的URL请求的超时时间,默认为:3s\n'
-            + '1.2.2.设置--代理:设置全局的URL请求的代理IP,默认为:off\n'
-            + '1.2.3.设置--协程池:设置全局的协程池中的协程数量,默认为:50\n'
-            + '1.2.5.设置--指纹提取:设置对已识别cms的MD5指纹提取,默认为:off\n'
-            + '1.2.6.设置--文件保存:设置程序运行结果的保存文件格式,默认为:.txt\n'
-            + '2.1.操作区域--域名输入:进行域名输入相关的操作\n'
-            + '2.1.1.域名输入--新增域名:添加域名\n'
-            + '2.1.2.域名输入--删除域名:删除域名\n'
-            + '2.1.3.域名输入--更新域名:更新域名\n'
-            + '2.1.4.域名输入--检查域名:判断输入的域名是否正确\n'
-            + '2.1.5.域名输入--确认:确定域名输入,自行对输入域名进行正确判断\n'
-            + '2.2.操作区域--指纹规则库查看:对指纹库进行增删查改操作\n'
-            + '2.2.1.Banner指纹库--新增指纹:添加指纹到指纹库,输入格式为:data|data\n'
-            + '2.2.1.Banner指纹库--删除指纹:删除指定的指纹,输入格式为:number\n'
-            + '2.2.1.Banner指纹库--查询指纹:查询指定的指纹,输入格式为:number\n'
-            + '2.2.1.Banner指纹库--更新指纹:更新指定的指纹,输入格式为:x|y|data\n'
-            + '2.2.2.Cms指纹库--新增指纹:添加指纹到指纹库,输入格式为:data|data|data|data\n'
-            + '2.2.2.Cms指纹库--删除指纹:删除指定的指纹,输入格式为:number\n'
-            + '2.2.2.Cms指纹库--查询指纹:查询指定的指纹,输入格式为:number\n'
-            + '2.2.2.Cms指纹库--更新指纹:更新指定的指纹,输入格式为:x|y|data\n'  
-            + '2.3.操作区域--指纹识别:开始指纹识别模块的运行及工具退出\n'
-            + '2.3.1.指纹识别--开始:开始进行Web指纹识别\n'
-            + '2.3.2.指纹识别--退出:关闭并退出程序\n'
-            + '3.结果输出:程序运行结果的输出展示\n'
-            + '4.工具运行动态显示栏:向用户显示工具正在进行的操作\n'
-            )     
-            self.output_data_label['text'] = '工具动态>>:正在停留GUI主界面!'
-            self.output_data_label.config(fg = 'green')  
-            self.output_data_label.update()            
-        menu_about.add_command(label='说明', command = creat_menu_about_explain)        
+            self.output_data_label.update()    
+            explain_top = tk.Toplevel(menu_about)
+            self.center_window(600,255,explain_top)         
+            explain_top.title('关于--说明--使用说明书--' + '路径:' + pwd.replace('Cms_get/','') + 'about.txt') 
+            explain_table = ttk.Treeview(explain_top,show = "headings") #列表
+            explain_table["columns"]=("序号","操作说明")
+            explain_table.column("序号",width = 60)
+            explain_table.column("操作说明",width = 494)
+            explain_table.heading("序号",text = "序号") 
+            explain_table.heading("操作说明",text = "操作说明")    
+            explain_table.place(x = 20,y = 0)          
+            yscrollbar = Scrollbar(explain_top,orient = VERTICAL,command = explain_table.yview) #Y滚动条
+            explain_table.configure(yscrollcommand = yscrollbar.set)
+            yscrollbar.pack(side = RIGHT, fill = Y)             
+            try :
+                file_read = open(pwd.replace('Cms_get/','') + 'about.txt','r+',encoding = 'utf-8')
+                explain_get = file_read.readlines()
+                file_read.close()
+            except IOError:                 
+                tkinter.messagebox.showerror(title = '查看说明书--错误',message = '打开文件:{}\n失败!\n该文件不存在,请新建该文件!'.format(pwd.replace('Cms_get/','') + 'about.txt'))
+            for i in range(len(explain_get)):
+                explain_table.insert('',i + 1,values=(i + 1,explain_get[i]))     
+            
+        menu_about.add_command(label='说明', command = creat_menu_about_explain)   
         menu_setting = tk.Menu(menu,tearoff = False)    
         menu.add_cascade(label='设置', menu = menu_setting) #下拉选项菜单-设置
         
@@ -150,6 +141,7 @@ class GUI(object):
                 try :
                     file = open(file_name,'r+',encoding = 'utf-8')
                     proxy_get = file.readlines()
+                    file.close()
                 except IOError:                 
                     tkinter.messagebox.showerror(title = '查看代理--错误',message = '打开文件:{}\n失败!\n该文件不存在,请新建该文件!'.format(file_name))
                 if ((len(proxy_get) == 0) and (file_name == pwd + 'proxies.txt')):
@@ -158,7 +150,6 @@ class GUI(object):
                     self.output_data_label.update()                 
                 else : pass
                 for i in range(len(proxy_get)):
-                    proxy_get[i].strip()
                     menu_setting_proxy_table.insert('',i + 1,values=(i + 1,proxy_get[i]))   
                     
             menu_setting_proxy_table_update_value(pwd + 'proxies_from_xiciproxy.txt')
@@ -194,6 +185,7 @@ class GUI(object):
             def open_proxy():
                 self.proxy_setting = 'open' #打开代理
                 proxies_num = user_function.check_proxy(time_out = self.url_time_out,association_number = self.association_number)
+                tkinter.messagebox.showinfo(title = '有效代理--结果', message = '有效代理数为:{}\n爬虫代理已开启!'.format(proxies_num))
                 self.output_data_label['text'] = '工具动态>>:URL代理已开启!'
                 self.output_data_label.config(fg = 'green')  
                 self.output_data_label.update()                  
@@ -666,7 +658,7 @@ class GUI(object):
                     domain_get[i].rstrip()
                     domain_input_table.insert('',i + 1,values=(i + 1,domain_get[i]))  #表格插入数据
                 if (len(domain_get) == 0):
-                    self.output_data_label['text'] = '工具提示>>:如果想一次输入多个域名,可以将多个域名保存至文件:{}'.format(file_name)
+                    self.output_data_label['text'] = '工具提示>>:输入多个域名,可将域名保存至文件:{}'.format(file_name)
                     self.output_data_label.config(fg = 'blue')  
                     self.output_data_label.update()                    
                 else : pass
@@ -866,17 +858,21 @@ class GUI(object):
                                 yscrollbar.pack(side = RIGHT, fill = Y)         
                                 for item in file_md5_get_table.get_children():#清除表格已有内容,初始化表格
                                     file_md5_get_table.delete(item) 
-                                for i in range(len(file_md5_list)): 
-                                    if (file_md5_list[i] != ['Not_found']):
-                                        file_md5_get_table.insert('',i + 1 ,values=(i + 1,file_md5_list[i][0],file_md5_list[i][1],file_md5_list[i][2],file_md5_list[i][3]))
+                                md5_list = []
+                                [md5_list.append(value) for value in file_md5_list if not value in md5_list]
+                                for i in range(len(md5_list)): 
+                                    if (md5_list[i] != ['Not_found']):
+                                        file_md5_get_table.insert('',i + 1 ,values=(i + 1,md5_list[i][0],md5_list[i][1],md5_list[i][2],md5_list[i][3]))
                                     else : pass
                                         
                                 def insert_value():
-                                    insert_value = user_function.add_file_md5_to_cms_database(file_md5_list) #添加指纹到CMS指纹库
+                                    insert_value = user_function.add_file_md5_to_cms_database(md5_list) #添加指纹到CMS指纹库
+                                    file_md5_list = []
                                     tkinter.messagebox.showinfo(title = '添加指纹--提示',message = '已成功将指纹添加至CMS指纹库!')
                                     file_md5_get_top.destroy()
                                     
                                 def insert_quit():
+                                    file_md5_list = []
                                     tkinter.messagebox.showinfo(title = '添加指纹--提示',message = '未将指纹添加至CMS指纹库!')
                                     file_md5_get_top.destroy()
                                     
